@@ -1,1 +1,12 @@
-<img loading="lazy" src="{{ .Destination | safeURL }}" alt="{{ .Text }}" {{ with .Title}} title="{{ . }}" {{ end }} />
+{{ with (.Page.Resources.GetMatch .Destination) }}
+  <figure>
+    {{ if ne .MediaType.SubType "svg" }}
+      <img loading="lazy" src="{{ (.Resize `x1024 webp Smart`).RelPermalink | safeURL }}" alt="{{ $.Text }}" />
+    {{ else }}
+      <img src="{{ .RelPermalink | safeURL }}" alt="{{ $.Text }}" />
+    {{ end }}
+    {{ with $.Title }}
+      <figcaption>{{ . }}</figcaption>
+    {{ end }}
+  </figure>
+{{ end }}
