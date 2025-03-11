@@ -1,0 +1,24 @@
+{{ $src := .Get "src" }}
+{{ $type := .Get "type" | default "mp3" }}
+{{ $preload := .Get "preload" | default "metadata" }}
+{{ $controls := .Get "controls" | default true }}
+{{ $loop := .Get "loop" | default false }}
+{{ $autoplay := .Get "autoplay" | default false }}
+{{ $muted := .Get "muted" | default false }}
+{{ $title := .Get "title" | default false }}
+
+<figure>
+    <audio
+    {{ if eq $controls true }}controls{{ end }}
+    {{ if eq $loop true }}loop{{ end }}
+    {{ if eq $autoplay true }}autoplay{{ end }}
+    {{ if eq $muted true }}muted{{ end }}
+    preload="{{ $preload }}"
+    class="audio-player">
+    <source src="{{ $src }}" type="audio/{{ $type }}">
+    Your browser does not support the audio element.
+    </audio>    
+    {{ with $title }}
+    <figcaption>{{ $title }}</figcaption>
+    {{ end }}
+</figure>
