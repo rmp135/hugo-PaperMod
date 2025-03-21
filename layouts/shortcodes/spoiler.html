@@ -1,0 +1,51 @@
+{{ $id := delimit (shuffle (seq 1 9)) "" }}
+<div class="spoiler-container" onclick="this.classList.add('revealed');">
+  <div class="spoiler-message">Reveal spoiler.</div>
+  <div class="spoiler-text">
+    {{ .Inner }}
+  </div>
+</div>
+
+<style>
+  .spoiler-container:not(.revealed) {
+    position: relative;
+    cursor: pointer;
+    user-select: none;
+  }
+
+  .spoiler-container .spoiler-message {
+    text-align: center;
+    background: var(--theme);
+  }
+
+  .spoiler-container .spoiler-message:not(.revealed) {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    color: var(--primary);
+    font-size: 0.9em;
+    font-style: italic;
+    pointer-events: none;
+  } 
+  
+  .spoiler-container .spoiler-text {
+    transition: all 0.3s ease;
+  }
+  
+  .spoiler-container:not(.revealed) .spoiler-text {
+    position: relative;
+    color: transparent;
+    text-shadow: 0 0 8px var(--primary);
+    filter: blur(4px);
+  }
+  
+  
+  .spoiler-container.revealed {
+    filter: none;
+    user-select: text;
+  }
+  .spoiler-container.revealed .spoiler-message {
+    display: none;
+  }
+</style>
