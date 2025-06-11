@@ -1,0 +1,48 @@
+<blockquote class="blockquote">
+  <p>{{ .Inner | markdownify }}</p>
+  {{ with .Get "author" }}
+  <footer class="blockquote-footer">
+    <cite>{{ . }}</cite>
+  </footer>
+  {{ end }}
+</blockquote>
+
+<style>
+  .blockquote {
+    padding: 1.5rem 2rem;
+    margin: 2rem 0;
+    border-left: 5px solid #6c757d;
+    position: relative;
+    font-family: "Georgia", serif;
+  }
+
+  .blockquote p {
+    font-size: 1.1rem;
+    font-style: italic;
+    margin-bottom: 0.5rem;
+  }
+
+  .blockquote p::before {
+    content: "";
+    font-size: 2.5rem;
+    color: #6c757d;
+    position: absolute;
+    left: 0.5rem;
+    top: -0.2rem;
+  }
+
+  .blockquote-footer {
+    display: block;
+    font-size: 0.85rem;
+    color: #6c757d;
+    text-align: right;
+  }
+
+  .blockquote-footer cite {
+    font-style: normal;
+  }
+
+  .blockquote-footer cite::before {
+    content: "— ";
+  }
+</style>
